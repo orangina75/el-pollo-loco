@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de" , translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-other.css">
+    <title>El Pollo Loco</title>
+    <link rel="icon" href="img/10_favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" sizes="32x32" href="img/10_favicon/favicon-32x32.png">
+    <link rel="icon" sizes="16x16" href="img/10_favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="img/10_favicon/apple-touch-icon.png">
+    <link rel="icon" sizes="192x192" href="img\10_favicon\android-chrome-192x192.png">
+    <script src="models/drawable-object.class.js"></script>
+    <script src="models/movable-object.class.js"></script>
+    <script src="models/character.class.js"></script>
+    <script src="models/chicken-normal.class.js"></script>
+    <script src="models/chicken-small.class.js"></script>
+    <script src="models/cloud.class.js"></script>
+    <script src="models/world.class.js"></script>
+    <script src="models/draw.class.js"></script>
+    <script src="models/collisions.class.js"></script>
+    <script src="models/status-bar.class.js"></script>
+    <script src="models/background-object.class.js"></script>
+    <script src="models/keyboard.class.js"></script>
+    <script src="models/level.class.js"></script>
+    <script src="models/throwable-object.class.js"></script>
+    <script src="models/endboss.class.js"></script>
+    <script src="models/audio.class.js"></script>
+    <script src="models/salsa-bottle.class.js"></script>
+    <script src="models/salsa-bottle-splash.class.js"></script>
+    <script src="models/coins.class.js"></script>
+    <script src="models/health.class.js"></script>
+    <script src="models/dead-chicken-normal.class.js"></script>
+    <script src="models/dead-chicken-small.class.js"></script>
+    <script src="models/dead-endboss.class.js"></script>
+    <script src="models/game-over.class.js"></script>
+    <script src="levels/level1.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/game.js"></script>
+</head>
+
+<body>
+
+    <div class="start-screen" id="start-screen">
+        <div class="headline">
+            <h1>Welcome to</h1>
+        </div>
+        <div class="footer">
+            <div class="footer-left">
+                <button class="howToPlay">How to play</button>
+                <button class="music-buttons" onclick="this.blur();">Music on/off</button>
+                <button class="sound-buttons" onclick="this.blur();">Sound on/off</button>
+            </div>
+            <div class="footer-middle">
+                <button id="start-button" class="start-button">START</button>
+            </div>
+            <div class="footer-right">
+                <a href="impressum.html">
+                    <button class="impressum" id="impressum-link">Impressum</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h1 id="game-title" style="display: none;">El Pollo Loco</h1>
+    <div class="canvas-container">
+        <canvas id="canvas" width="720" height="480"></canvas>
+        <div class="controls-middle" id="audio-controls">
+            <button class="music-buttons" onclick="this.blur();">Music</button>
+            <button class="sound-buttons" onclick="this.blur();">Sound</button>
+        </div>
+        <div class="controls-container">
+
+            <div id="mobile-controls" style="display: none;">
+                <div class="controls-left">
+                    <button id="btnLeft" class="sound">L</button>
+                    <button id="btnJump" class="sound">J</button>
+                </div>
+                <div class="controls-right">
+                    <button id="btnThrow" class="sound">T</button>
+                    <button id="btnRight" class="sound">R</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="howToPlayOverlay" class="overlay">
+        <div class="overlay-content">
+            <span class="close-btn">&times;</span>
+            <h2>How to Play</h2>
+            <p>LEFT = left arrow and RIGHT = right arrow</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;JUMP = SPACE and THROW = Q.</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MUSIC ON/OFF = M and SOUND ON/OFF = S</p>
+            <h3>HAVE FUN!!!</h3>
+        </div>
+    </div>
+
+    <div id="end-screen" class="end-screen" style="display: none;">
+        <div class="end-buttons-container">
+            <div class="end-buttons">
+                <button id="restart-button" class="end-button">Restart</button>
+                <button id="home-button" class="end-button">Back Home</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="orientation-warning" style="display: none;">
+        <p>Please rotate your device to landscape mode to play the game.</p>
+    </div>
+
+</body>
+
+</html>
