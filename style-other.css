@@ -9,6 +9,46 @@
 
 }
 
+@font-face {
+    font-family: 'luckiestguy';
+    src: url('fonts/luckiestguy.ttf') format('truetype');
+
+}
+
+@media (pointer: coarse) {
+    #mobile-controls {
+        display: flex;
+    }
+
+    .controls-container {
+        display: flex;
+    }
+
+    #btnLeft,
+    #btnRight,
+    #btnJump,
+    #btnThrow {
+        display: block;
+    }
+}
+
+@media (pointer: fine) {
+    #mobile-controls {
+        display: none;
+    }
+
+    .controls-container {
+        display: none;
+    }
+
+    #btnLeft,
+    #btnRight,
+    #btnJump,
+    #btnThrow {
+        display: none;
+    }
+}
+
 @keyframes flyInCenter {
     0% {
         transform: translate(-50%, -50%) scale(0);
@@ -102,7 +142,6 @@
     transform: translateX(-50%);
     width: 100%;
     max-width: 720px;
-    display: none;
     justify-content: space-between;
     padding: 10px 0;
 }
@@ -130,7 +169,7 @@
 }
 
 #mobile-controls {
-    display: none;
+    /* display: none; */
     width: 100%;
     justify-content: space-between;
     padding: 10px;
@@ -141,8 +180,8 @@
 #btnRight,
 #btnJump,
 #btnThrow {
-    display: block;
-    display: flex;
+    /* display: block; */
+    /* display: flex; */
     align-items: center;
     justify-content: center;
     padding: 5px;
@@ -170,17 +209,6 @@
 }
 
 @media (max-width: 768px) {
-
-    #btnLeft,
-    #btnRight,
-    #btnJump,
-    #btnThrow {
-        display: block;
-    }
-
-    #mobile-controls {
-        display: flex;
-    }
 
     .controls-container {
         display: flex;
@@ -241,13 +269,14 @@
 }
 
 @media (max-width: 500px) {
-.impressumh1 {
-    font-size: 30px;
-}
-.impressumh2 {
-    padding-top: 40px;
-    font-size: 20px;
-}
+    .impressumh1 {
+        font-size: 30px;
+    }
+
+    .impressumh2 {
+        padding-top: 40px;
+        font-size: 20px;
+    }
 
 }
 
@@ -278,4 +307,5 @@
         font-size: 40px;
         margin-bottom: 180px;
     }
+
 }

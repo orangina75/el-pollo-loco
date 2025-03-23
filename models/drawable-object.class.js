@@ -70,7 +70,7 @@ class DrawableObject {
      */
     drawTitle(ctx) {
         ctx.textAlign = "center";
-        ctx.font = "40px nosifer, Arial, sans-serif";
+        ctx.font = "40px luckiestguy, Arial, sans-serif";
         ctx.fillStyle = "black";
         ctx.fillText("Statistics", 360, 390);
     }

@@ -192,7 +192,8 @@ function backToHome() {
  */
 function checkOrientation() {
     let elements = getElements();
-    if (window.innerWidth < 800) {
+    let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice || window.innerWidth < 800) {
         if (window.innerHeight < window.innerWidth) {
             showMobile(elements);
         } else {

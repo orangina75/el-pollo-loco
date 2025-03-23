@@ -1,4 +1,6 @@
 class CollisionHandler {
+    deadEnemy = new Audio('audio/hurt_3.mp3');
+
     constructor(world) {
         this.world = world;
         this.intervals = [];
@@ -10,6 +12,16 @@ class CollisionHandler {
         this.numBottlesTotal = world.numBottlesTotal;
         this.collectedBottles = world.statusBarBottle.collectedBottles;
         this.totalCollectedBottles = world.totalCollectedBottles;
+        this.sounds = new Sounds();
+        this.addSounds();
+    }
+
+    /**
+     * Adds various sound effects to the sound manager.
+     * 
+     */
+    addSounds() {
+        sounds.addSound(this.deadEnemy);
     }
 
     /**
@@ -58,6 +70,15 @@ class CollisionHandler {
      * 
      */
     checkCollisionsChickenSmall() {
+        this.world.level.enemiesSmall.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.world.statusBarHealth.setPercentageHealth(this.character.energy);
+            }
+        });
+    }
+
+    checkCollisionsChickenSmallORIGINAL() {
         this.world.level.enemiesSmall.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
@@ -187,8 +208,8 @@ class CollisionHandler {
      * 
      */
     checkDeadbyJump() {
-        this.world.enemyNormalKilledByJump();
-        this.world.enemySmallKilledByJump();
+        this.enemyNormalKilledByJump();
+        this.enemySmallKilledByJump();
     }
 
     /**
@@ -225,4 +246,93 @@ class CollisionHandler {
         this.intervals.forEach(interval => clearInterval(interval));
         this.intervals = [];
     }
+
+    /**
+ * Checks if a normal enemy is killed by a jump.
+ * 
+ */
+    enemyNormalKilledByJump() {
+        this.level.enemiesNormal.forEach((enemy, i) => {
+            let collision =
+                this.character.x + this.character.width - this.character.offset.right > enemy.x + enemy.offset.left &&    // R -> L
+                this.character.y + this.character.height - this.character.offset.bottom + 30 > enemy.y + enemy.offset.top &&      // T -> B
+                this.character.x + this.character.offset.left < enemy.x + enemy.width - enemy.offset.right &&         // L -> R
+                this.character.y + this.character.offset.top < enemy.y + enemy.height - enemy.offset.bottom;
+            if (collision &&
+                this.character.isAboveGround() && 
+                this.character.speedY < 0) {
+                this.enemyNormalIsDead(enemy, i);
+                this.character.speedY = -10;
+            }
+        });
+    }
+
+    /**
+     * Checks if a small enemy is killed by a jump.
+     * 
+     */
+    enemySmallKilledByJump() {
+        this.level.enemiesSmall.forEach((enemy, i) => {
+            let collision =
+                this.character.x + this.character.width - this.character.offset.right > enemy.x + enemy.offset.left &&    // R -> L
+                this.character.y + this.character.height - this.character.offset.bottom + 30 > enemy.y + enemy.offset.top &&      // T -> B
+                this.character.x + this.character.offset.left < enemy.x + enemy.width - enemy.offset.right &&         // L -> R
+                this.character.y + this.character.offset.top < enemy.y + enemy.height - enemy.offset.bottom;
+            if (collision &&
+                this.character.isAboveGround() && 
+                this.character.speedY < 0) {
+                this.enemySmallIsDead(enemy, i);
+                this.character.speedY = -10;
+            }
+        });
+    }
+    
+    /**
+     * Handles the logic when a normal enemy is killed.
+     * 
+     * @param {Object} enemy - The enemy that has died.
+     * @param {number} i - The index of the enemy in the `enemiesNormal` array.
+     */
+    enemyNormalIsDead(enemy, i) {
+        let deadEnemy = new DeadChickenNormal(enemy.x, enemy.y);
+        this.playSound(this.deadEnemy, 1);
+        this.world.deadEnemies.push(deadEnemy);
+        this.level.enemiesNormal.splice(i, 1);
+        setTimeout(() => {
+            this.world.deadEnemies.splice(deadEnemy);
+        }, 1000);
+    }
+
+    /**
+     * Handles the logic when a small enemy is killed.
+     * 
+     * @param {Object} enemy - The small enemy that has died.
+     * @param {number} i - The index of the enemy in the `enemiesSmall` array.
+     */
+    enemySmallIsDead(enemy, i) {
+        let deadEnemy = new DeadChickenSmall(enemy.x, enemy.y);
+        this.playSound(this.deadEnemy, 1);
+        this.world.deadEnemies.push(deadEnemy);
+        this.level.enemiesSmall.splice(i, 1);
+        setTimeout(() => {
+            this.world.deadEnemies.splice(deadEnemy);
+        }, 1000);
+    }
+
+        /**
+     * Plays the provided sound with the specified volume, considering the mute state.
+     * 
+     * @param {HTMLAudioElement} sound - The sound to be played.
+     * @param {number} volume - The volume level for the sound, between 0 and 1.
+     */
+        playSound(sound, volume) {
+            if (sounds.soundsMuted) {
+                sound.muted = true;
+                sound.volume = 0;
+            } else {
+                sound.muted = false;
+                sound.volume = volume;
+            }
+            sound.play();
+        }
 }

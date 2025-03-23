@@ -111,38 +111,6 @@ class World {
     }
 
     /**
-     * Handles the logic when a normal enemy is killed.
-     * 
-     * @param {Object} enemy - The enemy that has died.
-     * @param {number} i - The index of the enemy in the `enemiesNormal` array.
-     */
-    enemyNormalIsDead(enemy, i) {
-        let deadEnemy = new DeadChickenNormal(enemy.x, enemy.y);
-        this.playSound(this.deadEnemy, 1);
-        this.deadEnemies.push(deadEnemy);
-        this.level.enemiesNormal.splice(i, 1);
-        setTimeout(() => {
-            this.deadEnemies.splice(deadEnemy);
-        }, 1000);
-    }
-
-    /**
-     * Handles the logic when a small enemy is killed.
-     * 
-     * @param {Object} enemy - The small enemy that has died.
-     * @param {number} i - The index of the enemy in the `enemiesSmall` array.
-     */
-    enemySmallIsDead(enemy, i) {
-        let deadEnemy = new DeadChickenSmall(enemy.x, enemy.y);
-        this.playSound(this.deadEnemy, 1);
-        this.deadEnemies.push(deadEnemy);
-        this.level.enemiesSmall.splice(i, 1);
-        setTimeout(() => {
-            this.deadEnemies.splice(deadEnemy);
-        }, 1000);
-    }
-
-    /**
      * Handles the logic when the endboss is defeated.
      * 
      * @param {Object} endboss - The endboss that has been defeated.
@@ -285,32 +253,6 @@ class World {
                     this.statusBarEndbossVisible = false;
                 }
             });
-        });
-    }
-
-    /**
-     * Checks if a normal enemy is killed by a jump.
-     * 
-     */
-    enemyNormalKilledByJump() {
-        this.level.enemiesNormal.forEach((enemy, i) => {
-            if (this.character.isColliding(enemy) &&
-                (this.character.isAboveGround() || this.character.speedY > 0)) {
-                this.enemyNormalIsDead(enemy, i);
-            }
-        });
-    }
-
-    /**
-     * Checks if a small enemy is killed by a jump.
-     * 
-     */
-    enemySmallKilledByJump() {
-        this.level.enemiesSmall.forEach((enemy, i) => {
-            if (this.character.isColliding(enemy) &&
-                (this.character.isAboveGround() || this.character.speedY > 0)) {
-                this.enemySmallIsDead(enemy, i);
-            }
         });
     }
 
