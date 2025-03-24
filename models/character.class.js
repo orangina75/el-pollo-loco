@@ -272,7 +272,7 @@ class Character extends MovableObject {
      * 
      */
     showGameOverScreen() {
-        this.world.showEndScreen();
+        this.world.showEndScreenLost();
         this.sounds.stopAllSounds();
         showEndButtons();
     }

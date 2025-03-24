@@ -59,6 +59,22 @@ function handleKeydown(event) {
 }
 
 /**
+ * Synchronisiert den Zustand der Sound-Buttons mit dem aktuellen Mute-Status.
+ * 
+ */
+function syncSoundButtons() {
+    sounds.updateSoundButton();
+}
+
+/**
+ * Synchronisiert den Zustand der Music-Buttons mit dem aktuellen Mute-Status.
+ * 
+ */
+function syncMusicButtons() {
+    backgroundMusic.updateMusicButton();
+}
+
+/**
  * Sets up the start button functionality. When the start button is clicked, 
  * the start screen will have a 'fly-out' animation, and after 1 second, 
  * the `startGame` function is triggered.
