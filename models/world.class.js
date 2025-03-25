@@ -293,7 +293,7 @@ class World {
      * 
      */
     showEndScreen() {
-        this.endScreen = new GameOver('img/9_intro_outro_screens/game_over/game over.png');
+        this.endScreen = new GameOver('img/9_intro_outro_screens/game_over/you won.png');
         this.endScreenBottle = new GameOverBottle('img/7_statusbars/3_icons/icon_salsa_bottle.png');
         this.endScreenCoin = new GameOverCoin('img/7_statusbars/3_icons/icon_coin.png');
     }
