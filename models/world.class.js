@@ -293,7 +293,7 @@ class World {
      * 
      */
     showEndScreen() {
-        this.endScreen = new GameOver('img/11_You won, you lost/You Won A.png');
+        this.endScreen = new GameOver('img/11_You_won_you_lost');
         this.endScreenBottle = new GameOverBottle('img/7_statusbars/3_icons/icon_salsa_bottle.png');
         this.endScreenCoin = new GameOverCoin('img/7_statusbars/3_icons/icon_coin.png');
     }
